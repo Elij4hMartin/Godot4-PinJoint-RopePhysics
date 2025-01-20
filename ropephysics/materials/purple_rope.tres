@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://de64w7g55hbby"]
+
+[ext_resource type="Texture2D" uid="uid://5eqshu0hyxfn" path="res://textures/kenney_prototype_textures/Purple/texture_09.png" id="1_hwk3o"]
+
+[resource]
+albedo_texture = ExtResource("1_hwk3o")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar_sharpness = 150.0

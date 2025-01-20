@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3 uid="uid://cssglj6choju3"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_aafa8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6ovi3"]
+radius = 0.25
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q6p8l"]
+radius = 0.35
+height = 1.8
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("HUD", "crosshair", "note_HUD", "note_text") groups=["Player"]]
+process_mode = 1
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_aafa8")
+HUD = NodePath("Head/Camera3D/PlayerHUD")
+crosshair = NodePath("")
+note_HUD = NodePath("Head/Camera3D/NoteHUD")
+note_text = NodePath("Head/Camera3D/NoteHUD/Panel/RichTextLabel")
+walk_speed = 3.0
+bob_freq = 2.5
+
+[node name="PlayerCollider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_6ovi3")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_q6p8l")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.656, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="Hand" type="Node3D" parent="Head/Camera3D"]
+
+[node name="HoldPosition" type="Node3D" parent="Head/Camera3D/Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -2)
+collision_mask = 5
+collide_with_areas = true
+
+[node name="PlayerHUD" type="Control" parent="Head/Camera3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NoteHUD" type="Control" parent="Head/Camera3D"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Head/Camera3D/NoteHUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Head/Camera3D/NoteHUD/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "[b]L[/b]orem [b]ipsum[/b] dolor sit amet, consectetur adipiscing elit. Quisque tempus enim a gravida pretium. Pellentesque ac interdum felis. Suspendisse euismod imperdiet mi, euismod gravida dolor luctus vel. Cras venenatis justo interdum aliquet aliquet. Ut aliquet hendrerit mauris eu euismod. Curabitur id neque lectus. Quisque a enim faucibus, ullamcorper risus at, scelerisque odio. Aliquam erat volutpat.
+
+Curabitur vel massa ut enim ornare posuere. Phasellus at finibus velit. Aenean sit amet nisl fringilla, congue libero elementum, tempus felis. Curabitur congue nisi ante, in ultrices velit finibus in. Nulla ullamcorper urna ac pellentesque posuere. Maecenas ultrices tristique gravida. Aliquam orci purus, semper et pellentesque vitae, maximus sed purus.
+
+Cras a odio a nisi vestibulum suscipit. Quisque tincidunt eleifend est, eget rhoncus mi mollis id. Fusce rhoncus urna sed metus auctor aliquam. Ut imperdiet sem tortor, ac lobortis risus porta ac. Donec vel rhoncus elit, eu malesuada est. In tortor mauris, molestie id ipsum ut, hendrerit consequat dui. Quisque id feugiat tortor."
+
+[node name="Hint" type="RichTextLabel" parent="Head/Camera3D/NoteHUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = -77.5
+offset_right = 77.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "[Right Click] to close"
+fit_content = true
+autowrap_mode = 0
