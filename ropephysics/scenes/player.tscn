@@ -10,28 +10,30 @@ height = 1.8
 radius = 0.35
 height = 1.8
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("HUD", "crosshair", "note_HUD", "note_text") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("HUD", "note_HUD", "note_text") groups=["Player"]]
 process_mode = 1
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_aafa8")
 HUD = NodePath("Head/Camera3D/PlayerHUD")
-crosshair = NodePath("")
 note_HUD = NodePath("Head/Camera3D/NoteHUD")
 note_text = NodePath("Head/Camera3D/NoteHUD/Panel/RichTextLabel")
 walk_speed = 3.0
 bob_freq = 2.5
 
 [node name="PlayerCollider" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape3D_6ovi3")
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_q6p8l")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.656, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
 
 [node name="Hand" type="Node3D" parent="Head/Camera3D"]
 
@@ -39,6 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.656, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+visible = false
 target_position = Vector3(0, 0, -2)
 collision_mask = 5
 collide_with_areas = true

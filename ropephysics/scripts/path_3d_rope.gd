@@ -42,7 +42,7 @@ func _ready() -> void:
 		segments[i].get_child(0).shape.radius = cable_thickness
 		segments[i].get_child(0).shape.height = (curve_points[i+1]-curve_points[i]).length()
 		# small offset added to prevent Vector UP
-		segments[i].look_at_from_position(curve_points[i] + (curve_points[i+1] - curve_points[i])/2 + Vector3(0.01, 0, 0.01), curve_points[i+1])
+		segments[i].look_at_from_position(curve_points[i] + (curve_points[i+1] - curve_points[i])/2 + Vector3(0.001, 0, -0.001), curve_points[i+1])
 		segments[i].rotation.x += PI/2
 		
 		# create pin joints
