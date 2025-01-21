@@ -1,8 +1,8 @@
 # Godot4 PinJoint RopePhysics
-A implementation of rope physics using Path3D nodes to procedurally generate geometry and PinJoint3D nodes to approximate rope physics.
-- Play demo here on itch.io: https://palin-drome.itch.io/godot-4-3d-pinjoint-rope-physics
+An implementation of rope physics using Path3D nodes to procedurally generate geometry, and PinJoint3D nodes to approximate rope physics.
+- Play the demo here on itch.io: https://palin-drome.itch.io/godot-4-3d-pinjoint-rope-physics
 ## Script usage instructions:
-- Add path_3d_rope.tscn to your scene
+- Add a path_3d_rope.tscn node to your scene
 - Change curve3D to your desired shape
 - Change the number of segments based on the shape and length of the curve
 - Adjust the number of sides the mesh has, and its thickness
