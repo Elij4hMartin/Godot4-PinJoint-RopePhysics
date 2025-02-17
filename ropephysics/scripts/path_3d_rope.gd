@@ -1,8 +1,15 @@
 extends Path3D
 # Script by Elijah Martin/Palin_drome
+@export_group("Segment Data")
 @export_range(3,200,1) var number_of_segments = 10
+@export var segment_mass : float = 2 ## Set mass of each segment RigidBody3D
+@export var segment_exclude_nodes_from_collision : bool = false ## Allow rope segments to collide with each other
+
+@export_group("Mesh Data")
 @export_range(3,50,1) var mesh_sides = 6
 @export var cable_thickness = 0.1
+
+@export_group("Rope Data")
 @export var fixed_start_point = true
 @export var fixed_end_point = true
 @export var rigidbody_attached_to_start : RigidBody3D
@@ -45,16 +52,16 @@ func _ready() -> void:
 		segments[i].look_at_from_position(curve_points[i] + (curve_points[i+1] - curve_points[i])/2 + Vector3(0.001, 0, -0.001), curve_points[i+1])
 		segments[i].rotation.x += PI/2
 		
-		# create pin joints
+		# create joints
 		# attach joints to rigidbodies path
 		if i == 0 && fixed_start_point:
 			#joints.append(ConeTwistJoint3D.new())
-			joints.append(PinJoint3D.new())
+			joints.append(HingeJoint3D.new())
 			self.add_child(joints[i])
 			joints[i].position = curve_points[i]
 		else:
 			#joints.append(ConeTwistJoint3D.new())
-			joints.append(PinJoint3D.new())
+			joints.append(HingeJoint3D.new())
 			self.add_child(joints[i])
 			joints[i].position = curve_points[i]
 			joints[i].node_a = segments[i-1].get_path()
@@ -88,7 +95,7 @@ func _ready() -> void:
 		joints[0].node_b = segments[0].get_path()
 	if fixed_end_point:
 		#joints.append(ConeTwistJoint3D.new())
-		joints.append(PinJoint3D.new())
+		joints.append(HingeJoint3D.new())
 		self.add_child(joints[-1])
 		joints[-1].position = curve_points[-1] + position_buffer
 		joints[-1].node_a = segments[number_of_segments - 1].get_path()
@@ -97,12 +104,22 @@ func _ready() -> void:
 		joints[0].node_b = rigidbody_attached_to_start.get_path()
 	if rigidbody_attached_to_end != null:
 		if fixed_end_point == false:
-			joints.append(PinJoint3D.new())
+			joints.append(HingeJoint3D.new())
 			self.add_child(joints[-1])
 			joints[-1].position = curve_points[-1] + position_buffer
 			joints[-1].node_a = segments[-1].get_path()
 		joints[-1].node_b = rigidbody_attached_to_end.get_path()
 
+	# Set parameters for all joints
+	for joint in joints:
+		if joint is HingeJoint3D:
+			joint.set("params/bias", 0.3)
+			joint.set("exclude_nodes_from_collision", segment_exclude_nodes_from_collision)
+	
+	# Set collision layers for all rigid bodies
+	for segment in segments:
+		if segment is RigidBody3D:
+			segment.mass = segment_mass 
 
 func _physics_process(_delta: float) -> void:
 	# update curve positions
