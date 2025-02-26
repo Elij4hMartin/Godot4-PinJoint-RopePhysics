@@ -22,6 +22,11 @@ func _ready() -> void:
 	rotation = Vector3(0,0,0)
 	var position_buffer = position
 	position = Vector3(0,0,0)
+	
+	# Duplicate the curve to ensure its unique and resets properly on reloads, avoiding drift due to re-adding the position_buffer
+	var cloned_curve = curve.duplicate()  # Duplicate curve
+	curve = cloned_curve  # Assign it as the active curve of the Path3D
+
 	# CSG Mesh shape array
 	var myShape : PackedVector2Array
 	for i in (number_of_segments+1):
