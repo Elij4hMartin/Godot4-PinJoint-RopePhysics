@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7fw5cfp7a2tk"
-path="res://.godot/imported/hand_open.svg-21720d709d8bbf632282330635b4e8ed.ctex"
+uid="uid://c3idfaesjfyjk"
+path="res://.godot/imported/target_b.svg-02c2ef89258c842b3a9f069ff009503a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/pinjoint-ropephysics/textures/placeholders/hand_open.svg"
-dest_files=["res://.godot/imported/hand_open.svg-21720d709d8bbf632282330635b4e8ed.ctex"]
+source_file="res://pinjoint-ropephysics-example/kenney_cursors/target_b.svg"
+dest_files=["res://.godot/imported/target_b.svg-02c2ef89258c842b3a9f069ff009503a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0sp18aud6g2p"
-path="res://.godot/imported/pointer_c.svg-6384d349a32007d6b7ada93c421ebffb.ctex"
+uid="uid://dveu7no5orvc8"
+path="res://.godot/imported/hand_point.svg-4fcec1bf3c14dcfeae49512c06f1ffc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/pinjoint-ropephysics/textures/placeholders/pointer_c.svg"
-dest_files=["res://.godot/imported/pointer_c.svg-6384d349a32007d6b7ada93c421ebffb.ctex"]
+source_file="res://pinjoint-ropephysics-example/kenney_cursors/hand_point.svg"
+dest_files=["res://.godot/imported/hand_point.svg-4fcec1bf3c14dcfeae49512c06f1ffc3.ctex"]
 
 [params]
 
@@ -38,6 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
+svg/scale=2.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false
