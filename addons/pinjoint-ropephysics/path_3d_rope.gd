@@ -3,6 +3,10 @@ extends Path3D
 @export_range(3,200,1) var number_of_segments = 10
 @export_range(3,50,1) var mesh_sides = 6
 @export var cable_thickness = 0.1
+@export_range(0.0, 0.99, 0.01) var joint_bias_or_stiffness = 0.2
+@export_range(0.0, 64.0, 0.1) var max_impulse = 2.0
+@export_range(0.0, 100.0, 0.1,"0 to disable to 100 to make completely stable") var physics_dampening = 0.5
+@export var cable_segment_mass = 2.0
 @export var fixed_start_point = true
 @export var fixed_end_point = true
 @export var rigidbody_attached_to_start : RigidBody3D
@@ -11,8 +15,8 @@ extends Path3D
 @onready var mesh := $CSGPolygon3D
 @onready var distance = curve.get_baked_length()
 # instances
-var segments : Array
-var joints : Array
+var segments : Array[RigidBody3D]
+var joints : Array[PinJoint3D]
 var curve_points : Array
 
 # Called when the node enters the scene tree for the first time.
@@ -49,7 +53,8 @@ func _ready() -> void:
 		# small offset added to prevent Vector UP
 		segments[i].look_at_from_position(curve_points[i] + (curve_points[i+1] - curve_points[i])/2 + Vector3(0.001, 0, -0.001), curve_points[i+1])
 		segments[i].rotation.x += PI/2
-		
+		segments[i].linear_damp = physics_dampening
+		segments[i].mass = cable_segment_mass
 		# create pin joints
 		# attach joints to rigidbodies path
 		if i == 0 && fixed_start_point:
@@ -57,6 +62,8 @@ func _ready() -> void:
 			joints.append(PinJoint3D.new())
 			self.add_child(joints[i])
 			joints[i].position = curve_points[i]
+			joints[i].set_param(PinJoint3D.PARAM_BIAS, joint_bias_or_stiffness)
+			joints[i].set_param(PinJoint3D.PARAM_IMPULSE_CLAMP, max_impulse)
 		else:
 			#joints.append(ConeTwistJoint3D.new())
 			joints.append(PinJoint3D.new())

@@ -63,10 +63,10 @@ height = 10.0
 resource_local_to_scene = true
 bake_interval = 512.0
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, 0, 0, 5.89686, -1, 0, 0, 0, 0, 0, 0, 0, 10.9, 0, 0),
-"tilts": PackedFloat32Array(0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, 0, 0, 10.9, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
 }
-point_count = 3
+point_count = 2
 
 [sub_resource type="Curve3D" id="Curve3D_siioa"]
 resource_local_to_scene = true
@@ -202,6 +202,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -9)
 shape = SubResource("BoxShape3D_8w4v7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="wall" unique_id=1846068403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0031108856, 4.7683716e-07, 0.0019245148)
 material_override = ExtResource("3_tt5lo")
 mesh = SubResource("BoxMesh_hjxbi")
 
@@ -320,6 +321,8 @@ shape = SubResource("CylinderShape3D_i70t2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -5)
 curve = SubResource("Curve3D_isxgy")
 number_of_segments = 8
+joint_bias_or_stiffness = 2.0
+physics_dampening = 5.4
 fixed_end_point = true
 
 [node name="Path3DRope2" parent="." unique_id=1136982146 instance=ExtResource("5_e7wen")]
@@ -366,6 +369,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2, -5)
 curve = SubResource("Curve3D_e7wen")
 number_of_segments = 5
 cable_thickness = 0.2
+joint_bias_or_stiffness = 3.0
+cable_segment_mass = 20.0
 fixed_start_point = false
 rigidbody_attached_to_start = NodePath("../GreenBall1")
 rigidbody_attached_to_end = NodePath("../GreenBall2")
@@ -388,5 +393,7 @@ shape = SubResource("SphereShape3D_yl04m")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RedBall" unique_id=970508720]
 material_override = ExtResource("8_b8jpf")
 mesh = SubResource("SphereMesh_341ri")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="." unique_id=1217423584]
 
 [connection signal="pressed" from="PauseScreen/Button" to="PauseScreen" method="_on_button_pressed"]
